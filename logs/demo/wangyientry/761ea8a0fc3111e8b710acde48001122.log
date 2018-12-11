@@ -1,0 +1,43 @@
+2018-12-10 12:10:04 [scrapy.utils.log] INFO: Scrapy 1.5.1 started (bot: newsspider)
+2018-12-10 12:10:04 [scrapy.utils.log] INFO: Versions: lxml 4.2.5.0, libxml2 2.9.8, cssselect 1.0.3, parsel 1.5.1, w3lib 1.19.0, Twisted 18.7.0, Python 3.7.0 (default, Jun 28 2018, 07:39:16) - [Clang 4.0.1 (tags/RELEASE_401/final)], pyOpenSSL 18.0.0 (OpenSSL 1.0.2p  14 Aug 2018), cryptography 2.3.1, Platform Darwin-17.7.0-x86_64-i386-64bit
+2018-12-10 12:10:04 [scrapy.crawler] INFO: Overridden settings: {'BOT_NAME': 'newsspider', 'LOG_FILE': 'logs/demo/wangyientry/761ea8a0fc3111e8b710acde48001122.log', 'NEWSPIDER_MODULE': 'newsspider.spiders', 'SPIDER_MODULES': ['newsspider.spiders']}
+2018-12-10 12:10:04 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.memusage.MemoryUsage',
+ 'scrapy.extensions.logstats.LogStats']
+2018-12-10 12:10:04 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'newsspider.middlewares.SeleniumMiddleWare',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2018-12-10 12:10:04 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2018-12-10 12:10:04 [scrapy.middleware] INFO: Enabled item pipelines:
+['newsspider.pipelines.NewsPipeline']
+2018-12-10 12:10:04 [scrapy.core.engine] INFO: Spider opened
+2018-12-10 12:10:04 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2018-12-10 12:10:04 [scrapy.extensions.telnet] DEBUG: Telnet console listening on 127.0.0.1:6024
+2018-12-10 12:10:04 [peewee] DEBUG: ('SELECT `t1`.`id`, `t1`.`status`, `t1`.`jobs`, `t1`.`finished`, `t1`.`unfinished`, `t1`.`failed`, `t1`.`created_at`, `t1`.`updated_at` FROM `task` AS `t1` WHERE (`t1`.`status` = %s)', ['inprogress'])
+2018-12-10 12:10:04 [scrapy.core.engine] INFO: Closing spider (finished)
+2018-12-10 12:10:04 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2018, 12, 10, 4, 10, 4, 852294),
+ 'log_count/DEBUG': 2,
+ 'log_count/INFO': 7,
+ 'memusage/max': 60891136,
+ 'memusage/startup': 60887040,
+ 'start_time': datetime.datetime(2018, 12, 10, 4, 10, 4, 828986)}
+2018-12-10 12:10:04 [scrapy.core.engine] INFO: Spider closed (finished)
