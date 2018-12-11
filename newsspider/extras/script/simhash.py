@@ -68,6 +68,17 @@ def cal_sim_hash(text):
     return simhash
 
 
+def hammingDis(simhash1, simhash2):
+    t1 = '0b' + simhash1
+    t2 = '0b' + simhash2
+    n = int(t1, 2) ^ int(t2, 2)
+    i = 0
+    while n:
+        n = (n - 1) & n
+        i += 1
+    return i
+
+
 if __name__ == '__main__':
     args = parse_args()
     config = importlib.import_module(args.config)

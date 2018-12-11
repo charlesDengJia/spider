@@ -11,5 +11,5 @@ cd /Users/jiadeng/Downloads/machinelearningown/spider/newsspider/newsspider/extr
 
 
 # 创建任务并将任务上送job 到redis
-python scheduler.py -c product_wangyi_config -a create -d 163.com
+python scheduler.py -c product_config -a create -d 163.com -r news_product_wangyi
 

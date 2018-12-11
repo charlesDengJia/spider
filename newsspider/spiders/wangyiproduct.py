@@ -12,6 +12,7 @@ class WangyiproductSpider(scrapy.Spider):
     allowed_domains = ['163.com']
     start_urls = ['http://163.com/']
     web = 'wangyi'
+    class_type = ''
 
     def start_requests(self):
         database.init_database(config.db)
@@ -76,6 +77,9 @@ class WangyiproductSpider(scrapy.Spider):
         for image in images:
             imagelist.append(image.get_attribute('src'))
         product['images'] = ";".join(imagelist)
+
+        product['class'] = self.class_type
+
         # html  标签文本
         element = utils.find_element_by_css_selector(driver, '#epContentLeft')
         htmlvalue = None

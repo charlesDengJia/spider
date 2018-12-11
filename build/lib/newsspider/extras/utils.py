@@ -70,7 +70,6 @@ def parse(response):
     meta = response.meta
     config = meta['config']
     database = meta['database']
-    # database_product = meta['database_product']
     url = meta['url']
     result = build_result(meta)
     try:
@@ -83,6 +82,4 @@ def parse(response):
         if driver:
             driver.quit()
     result['database'] = database
-    # if database_product:
-    #     result['database_product'] = database_product
     yield result

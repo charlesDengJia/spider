@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from newsspider.extras import entry_sohu_config as config
+
+from newsspider.extras import entry_config as config
 
 from newsspider.extras import newsspider_database as database
 
@@ -16,6 +17,7 @@ class NewsentrySpider(scrapy.Spider):
 
     def start_requests(self):
         database.init_database(config.db)
+        config.queue['prefix'] = 'news_entry_sohu'
 
         for job in utils.fetch_jobs(database, queue, config):
             url = job['url']

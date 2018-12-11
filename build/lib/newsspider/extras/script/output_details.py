@@ -12,7 +12,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-c',
                         '--config',
-                        default='product_config')
+                        default='product_sohu_config')
     parser.add_argument('-f',
                         '--file')
     parser.add_argument('-b',

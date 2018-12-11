@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from newsspider.extras import product_wangyi_config as config
+from newsspider.extras import product_config as config
 from newsspider.extras import newsspider_database as database
 from newsspider.extras import news_queue as queue
 from newsspider.extras import utils
@@ -15,6 +15,8 @@ class WangyiproductSpider(scrapy.Spider):
 
     def start_requests(self):
         database.init_database(config.db)
+        config.queue['prefix'] = 'news_product_wangyi'
+
         for job in utils.fetch_jobs(database, queue, config):
             url = job['url']
             url = json.loads(url)
@@ -79,4 +81,4 @@ class WangyiproductSpider(scrapy.Spider):
         htmlvalue = None
         if element:
             htmlvalue = element.get_attribute('innerHTML').strip()
-        return json.dumps(product),htmlvalue
+        return json.dumps(product), htmlvalue

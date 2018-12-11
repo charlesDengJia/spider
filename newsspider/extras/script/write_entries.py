@@ -11,7 +11,7 @@ def parse_args():
                         '--file')
     parser.add_argument('-c',
                         '--config',
-                        default='entry_sohu_config')
+                        default='entry_config')
     return parser.parse_args()
 
 if __name__ == '__main__':

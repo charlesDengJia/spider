@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from newsspider.extras import entry_wangyi_config as config
+from newsspider.extras import entry_config as config
 from newsspider.extras import newsspider_database as database
 from newsspider.extras import news_queue as queue
 from newsspider.extras import utils
 import json
-
 
 
 class WangyientrySpider(scrapy.Spider):
@@ -15,6 +14,7 @@ class WangyientrySpider(scrapy.Spider):
 
     def start_requests(self):
         database.init_database(config.db)
+        config.queue['prefix'] = 'news_entry_wangyi'
 
         for job in utils.fetch_jobs(database, queue, config):
             url = job['url']
@@ -56,6 +56,5 @@ class WangyientrySpider(scrapy.Spider):
             productdict['class'] = '专家'
         else:
             productdict['class'] = None
-
 
         return json.dumps(productdict), None

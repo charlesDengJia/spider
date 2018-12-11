@@ -2,7 +2,7 @@
 import scrapy
 from newsspider.extras import utils
 import time
-from newsspider.extras import entry_sohu_config as config
+from newsspider.extras import entry_config as config
 from newsspider.extras import newsspider_database as database
 
 
@@ -41,7 +41,7 @@ class SouhunspiderSpider(scrapy.Spider):
             print("current:" + currenturl)
             article['current_url'] = currenturl
             ##标签获取
-            taglist=[]
+            taglist = []
             for tag in tags:
                 print(tag.text)
                 taglist.append(tag.text)

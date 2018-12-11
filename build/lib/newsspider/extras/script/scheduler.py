@@ -20,6 +20,8 @@ def parse_args():
                         default=0)
     parser.add_argument('-d',
                         '--domain')
+    parser.add_argument('-r',
+                        '--redis')
     return parser.parse_args()
 
 
@@ -36,8 +38,8 @@ def create_task(config):
                            status=config.js_new)
         job.save()
         queue_.put(json.dumps({'id': job.id, \
-                    'source_id': source.id, \
-                    'url': source.url}))
+                               'source_id': source.id, \
+                               'url': source.url}))
     task.status = config.ts_inprogress
     task.jobs = len(sources)
     task.save()
@@ -93,8 +95,8 @@ def retry_task(task_id, config):
                 where(database.Source.id == job.source_id).get()
             if source.enabled:
                 queue_.put(json.dumps({'id': job.id, \
-                            'source_id': source.id, \
-                            'url': source.url}))
+                                       'source_id': source.id, \
+                                       'url': source.url}))
                 job.status = config.js_new
                 job.save()
         task.status = config.ts_inprogress
@@ -108,6 +110,7 @@ if __name__ == '__main__':
     args = parse_args()
     config = importlib.import_module(args.config)
     config.domain = args.domain
+    config.queue['prefix'] = args.redis
     database.init_database(config.db)
     if args.action == 'create':
         create_task(config)

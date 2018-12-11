@@ -10,4 +10,4 @@ cd /Users/jiadeng/Downloads/machinelearningown/spider/newsspider/newsspider/extr
 
 # 写入数据源
 # 创建任务并将任务上送job 到redis
-python write_entries.py -f entries/wangyi.txt && python scheduler.py -c entry_wangyi_config -a create -d 163.com
+python write_entries.py -f entries/wangyi.txt && python scheduler.py -c entry_config -a create -d 163.com -r news_entry_wangyi

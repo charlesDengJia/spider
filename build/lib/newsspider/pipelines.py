@@ -2,7 +2,7 @@
 
 from datetime import datetime
 import json
-from newsspider.extras import product_sohu_config as configp
+from newsspider.extras import product_config as configp
 
 from newsspider.extras import newsspider_database as database_product
 
@@ -15,7 +15,6 @@ class NewsspiderPipeline(object):
 class NewsPipeline(object):
     def process_item(self, item, spider):
         content = item['content']
-        html = item['html']
         database = item['database']
 
         if spider.name.endswith('entry'):
@@ -49,6 +48,11 @@ class NewsPipeline(object):
         else:
 
             if content:
+                try:
+                    html = item['html']
+                except:
+                    html = None
+
                 result = database.Result.select(). \
                     where(database.Result.source_id == item['source_id'])
                 if result:

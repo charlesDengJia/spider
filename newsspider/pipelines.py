@@ -66,11 +66,11 @@ class NewsPipeline(object):
                 result.save()
 
                 # todo:
-                source = database.Source.select().where(database.Source.id == item['source_id'])
-                source = source.get()
-                source.updated_at = datetime.now()
-                source.enabled = False
-                source.save()
+                # source = database.Source.select().where(database.Source.id == item['source_id'])
+                # source = source.get()
+                # source.updated_at = datetime.now()
+                # source.enabled = False
+                # source.save()
 
                 job = database.Job.select(). \
                     where(database.Job.id == item['job_id']).get()
