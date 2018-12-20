@@ -1,10 +1,12 @@
+# -*- coding: utf-8 -*-
+
 import simhash as sh
 import argparse
 
 import newsspider_database as database
 import news_queue as queue
 import importlib
-
+import json
 
 def parse_args():
     parser = argparse.ArgumentParser()
@@ -52,7 +54,7 @@ if __name__ == '__main__':
             ##是不是重复项
             if not checkTheSimhashExcited(queue_, item.simhash):
                 article_info = json.loads(item.content)
-                filter_item = Filter()
+                filter_item = database.Filter()
                 filter_item.source_id = item.source_id
                 filter_item.simhash = item.simhash
                 filter_item.release_time = article_info['release_time']

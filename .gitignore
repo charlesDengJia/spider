@@ -1,0 +1,7 @@
+*.db
+*.pyc
+build/
+*.xml
+*.iml
+project.egg-info/
+*.egg
