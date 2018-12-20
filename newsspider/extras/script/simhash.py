@@ -1,10 +1,15 @@
+# -*- coding: utf-8 -*-
+
 import argparse
 import importlib
 import sys
 import traceback
 import jieba
+import jieba.analyse
+
 import datetime as dt
-import inspect
+
+from datetime import datetime
 
 sys.path.append('../')
 import newsspider_database as database
@@ -16,7 +21,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-c',
                         '--config',
-                        default='product_sohu_config')
+                        default='product_config')
     return parser.parse_args()
 
 
@@ -33,15 +38,15 @@ def string_hash(source):
         if x == -1:
             x = -2
         x = bin(x).replace('0b', '').zfill(64)[-64:]
-        print(source, x)
+        # print(source, x)
         return str(x)
 
 
-def cal_sim_hash(text):
-    seg = jieba.cut(text)
+def cal_sim_hash(key, text):
+    seg = jieba.cut(text.replace("\n",""))
     jieba.analyse.set_stop_words('/Users/jiadeng/Downloads/machinelearningown/stopwords.txt')
     keyword = jieba.analyse.extract_tags('|'.join(seg), topK=20, withWeight=True, allowPOS=())
-    print(keyword)
+    # print(keyword)
     keyList = []
     for feature, weight in keyword:
         weight = int(weight * 100)
@@ -59,11 +64,14 @@ def cal_sim_hash(text):
     if (keyList == []):
         print('00')
     simhash = ''
-    for i in list_sum:
-        if i > 0:
-            simhash = simhash + '1'
-        else:
-            simhash = simhash + '0'
+    try:
+        for i in list_sum:
+            if i > 0:
+                simhash = simhash + '1'
+            else:
+                simhash = simhash + '0'
+    except Exception as msg:
+        print("souce_id:%s" % key, "异常：%s" % msg)
     print(simhash)
     return simhash
 
@@ -79,15 +87,30 @@ def hammingDis(simhash1, simhash2):
     return i
 
 
+def isDuplicated(simhash1, simhash2, dis):
+    result_dis = hammingDis(simhash1, simhash2)
+    if result_dis > dis:
+        return False
+    elif result_dis > 0 :
+        print('isDuplicated:',simhash1,',',simhash2)
+        print('result_dis:',result_dis)
+    else:
+        pass
+    return True
+
+
 if __name__ == '__main__':
     args = parse_args()
     config = importlib.import_module(args.config)
     try:
         database.init_database(config.db)
-        for url in urls:
-            result = database.Source.select(). \
-                where(database.Source.url == url)
-            if not result:
-                database.Source(url=url).save()
+        result = database.Result.select().where(database.Result.simhash.is_null(True))
+        for item in result.iterator():
+            article_info = json.loads(item.content)
+            sim_hash_value = cal_sim_hash(item.source_id, article_info['text'])
+            item.simhash = sim_hash_value
+            item.updated_at = datetime.now()
+            item.save()
     except Exception as e:
         print('%s\n%s' % (e, traceback.print_exc()))
+

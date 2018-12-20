@@ -62,6 +62,23 @@ class Result(Model):
         database = None
 
 
+class Filter(Model):
+    source_id = IntegerField()
+    simhash = TextField()
+    create_at = DateTimeField(default=dt.datetime.now)
+    update_at = DateTimeField(default=dt.datetime.now)
+    text = TextField()
+    class_type = TextField()
+    tag = TextField()
+    title = TextField()
+    release_time = DateTimeField(default=dt.datetime.now)
+    url = TextField()
+    source_from = TextField()
+
+    class Meta:
+        database = None
+
+
 def init_database(config):
     db = MySQLDatabase(host=config['host'],
                        user=config['user'],
