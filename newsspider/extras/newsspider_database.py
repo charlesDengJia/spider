@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import argparse
 import datetime as dt
 import importlib
@@ -51,6 +53,7 @@ class Source(Model):
 class Result(Model):
     content = TextField()
     html = TextField()
+    simhash = TextField()
     source_id = IntegerField()
     created_at = DateTimeField(default=dt.datetime.now)
     updated_at = DateTimeField(default=dt.datetime.now)

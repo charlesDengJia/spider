@@ -6,4 +6,7 @@
 cd /Users/jiadeng/Downloads/machinelearningown/spider/newsspider/newsspider/extras/script
 
 
-python write_entries.py -f entries/qq.txt && python scheduler.py -c entry_config -a create -d qq.com -r news_entry_qq
+
+
+python scheduler.py -c product_config -a create -d gmw.cn -r news_product_gmw
+

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 db = {'host': 'localhost',
       'user': 'root',
       'passwd': 'dengjia1778$',
