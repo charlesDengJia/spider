@@ -8,10 +8,12 @@ import news_queue as queue
 import importlib
 import json
 
+
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-c',
-                        '--config')
+                        '--config',
+                        default='product_config')
     parser.add_argument('-d',
                         '--domain')
     parser.add_argument('-r',
@@ -43,8 +45,10 @@ if __name__ == '__main__':
     args = parse_args()
     config = importlib.import_module(args.config)
     queue_ = queue.QueueL(config.queue)
+    database.init_database(config.db)
     data = database.Result.select().where(
-        database.Result.content.contains("www.sohu.com") & (database.Result.simhash.is_null(False) | database.Result.simhash != ""))
+        database.Result.content.contains("www.sohu.com") & (
+                database.Result.simhash.is_null(False) | database.Result.simhash != ""))
     i = 0
     for item in data:
         i += 1
@@ -70,4 +74,3 @@ if __name__ == '__main__':
         #             print(item.source_id)
         except Exception as e:
             print("save_exception:", item.source_id, e)
-

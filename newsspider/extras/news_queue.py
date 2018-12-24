@@ -48,16 +48,16 @@ class QueueS:
 
 class QueueL:
     def __init__(self, config):
-        self._db = redis.Redis(host=config['host'], port=config['port'],db=1)
+        self._db = redis.Redis(host=config['host'], port=config['port'], db=1)
 
-    def qsize(self,key):
+    def qsize(self, key):
         return self._db.llen(key)
 
     def empty(self):
         return self.qsize() == 0
 
-    def put(self,key,item):
+    def put(self, key, item):
         return self._db.rpush(key, item)
 
-    def get(self,key):
-        return self._db.lrange(key,0,-1)
+    def get(self, key):
+        return self._db.lrange(key, 0, -1)
