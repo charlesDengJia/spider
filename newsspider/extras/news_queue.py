@@ -48,7 +48,7 @@ class QueueS:
 
 class QueueL:
     def __init__(self, config):
-        self._db = redis.Redis(host=config['host'], port=config['port'], db=1)
+        self._db = redis.Redis(host=config['host'], port=config['port'], db=2)
 
     def qsize(self, key):
         return self._db.llen(key)

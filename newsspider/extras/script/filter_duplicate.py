@@ -46,8 +46,7 @@ if __name__ == '__main__':
     config = importlib.import_module(args.config)
     queue_ = queue.QueueL(config.queue)
     database.init_database(config.db)
-    data = database.Result.select().where(
-        database.Result.content.contains("www.sohu.com") & (
+    data = database.Result.select().where((
                 database.Result.simhash.is_null(False) | database.Result.simhash != ""))
     i = 0
     for item in data:
@@ -69,6 +68,7 @@ if __name__ == '__main__':
                 filter_item.source_from = article_info['web']
                 filter_item.url = article_info['url']
                 filter_item.class_type = article_info['class']
+                filter_item.result_id = item.id
                 filter_item.save()
         #         else:
         #             print(item.source_id)

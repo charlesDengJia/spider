@@ -51,6 +51,7 @@ class Source(Model):
 
 
 class Result(Model):
+    id = IntegerField()
     content = TextField()
     html = TextField()
     simhash = TextField()
@@ -74,6 +75,7 @@ class Filter(Model):
     release_time = DateTimeField(default=dt.datetime.now)
     url = TextField()
     source_from = TextField()
+    result_id = IntegerField()
 
     class Meta:
         database = None
