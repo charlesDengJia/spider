@@ -43,7 +43,7 @@ def string_hash(source):
 
 
 def cal_sim_hash(key, text):
-    seg = jieba.cut(text.replace("\n",""))
+    seg = jieba.cut(text.replace("\n", ""))
     jieba.analyse.set_stop_words('/Users/jiadeng/Downloads/machinelearningown/stopwords.txt')
     keyword = jieba.analyse.extract_tags('|'.join(seg), topK=20, withWeight=True, allowPOS=())
     # print(keyword)
@@ -91,9 +91,9 @@ def isDuplicated(simhash1, simhash2, dis):
     result_dis = hammingDis(simhash1, simhash2)
     if result_dis > dis:
         return False
-    elif result_dis > 0 :
-        print('isDuplicated:',simhash1,',',simhash2)
-        print('result_dis:',result_dis)
+    elif result_dis > 0:
+        print('isDuplicated:', simhash1, ',', simhash2)
+        print('result_dis:', result_dis)
     else:
         pass
     return True
@@ -113,4 +113,3 @@ if __name__ == '__main__':
             item.save()
     except Exception as e:
         print('%s\n%s' % (e, traceback.print_exc()))
-
