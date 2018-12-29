@@ -6,6 +6,9 @@
 
 cd /Users/jiadeng/Downloads/machinelearningown/spider/newsspider/newsspider/extras/script
 
+
+/anaconda3/bin/python simhash.py && /anaconda3/bin/python filter_duplicate.py
+
 # qq
 /anaconda3/bin/python write_entries.py -f entries/qq.txt && /anaconda3/bin/python scheduler.py -c entry_config -a create -d qq.com -r news_entry_qq
 
